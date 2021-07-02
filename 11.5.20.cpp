@@ -201,12 +201,32 @@ float ctwl_sun_values(CTWL *list)
 
 void ctwl_destroy(CTWL* list)
 {
-
+	TWN *prvok;
+	prvok = list->cur;
+	
+	if(list->cur==NULL)
+	{
+		free(list);
+	}
+	else
+	{
+		while(1)   //až teraz som objavil že existuje niečo ako nekonečna slučka
+		{
+			ctwl_cur_step_right(list);
+			
+			if(list->cur !=prvok)
+				free(list->cur);
+			else
+				break;
+		}
+		free(list->cur);
+	}
+	free(list);
 }
 
 main()
 {
- int velkost = 5;
+ unsigned int velkost = 5;
  CTWL *zoznam;
  srand(time(0));
  
@@ -214,7 +234,7 @@ main()
  ctwl_print(zoznam);
  ctwl_sun_values(zoznam);
  
- printf("value : %.f",ctwl_sun_values(zoznam));
+ printf("\n\nvalue : %.f",ctwl_sun_values(zoznam));
 
  ctwl_delete(zoznam);
 }
