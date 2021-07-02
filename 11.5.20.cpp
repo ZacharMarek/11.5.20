@@ -131,12 +131,35 @@ CTWL *ctwl_create_random(unsigned int size)
 
 char ctwl_delete(CTWL* list) //odstranenie kurzora
 {
-	TWN *cur;
+	TWN *cur, *cur_plus, *cur_minus;
 	
 	if(list->cur==NULL)
 		return CTWL_FAIL;
 		
-	free(cur);	
+	if(list->cur->prev == list->cur && list->cur->next == list->cur)
+	{ 
+		free(list->cur->prev);
+		free(list->cur->next);
+		
+		list->cur = NULL;
+		
+		return CTWL_OK;
+	}
+	
+	cur = list->cur;
+	cur_plus = list->cur->next;
+	cur_minus = list->cur->prev;
+	
+	
+	ctwl_cur_step_right(list);
+	list->cur->prev = cur_minus;
+	ctwl_cur_step_left(list);
+	list->cur->next = cur_minus;
+	ctwl_cur_step_right(list);
+	
+	free(cur);
+	return CTWL_OK;
+		
 		
 }
 
@@ -192,5 +215,7 @@ main()
  ctwl_sun_values(zoznam);
  
  printf("value : %.f",ctwl_sun_values(zoznam));
+
+ ctwl_delete(zoznam);
 }
 
