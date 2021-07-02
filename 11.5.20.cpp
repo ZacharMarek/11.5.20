@@ -161,16 +161,16 @@ void ctwl_print(CTWL *list)
 float ctwl_sun_values(CTWL *list)
 {
 	TWN *prvok;
-	float value ;
+	prvok= list->cur;
+	unsigned int value =0;
 	
-	prvok = list->cur;
 	value = list->cur->data;
+	ctwl_cur_step_right(list);
 	
-	while(list->cur > prvok)
+	while(list->cur > prvok)	//kym neprejdeme koliečko
 	{
-		value+=list->cur->data; 		//asi som niečo prehliadol
-		//list->cur=list->cur->next;
-		ctwl_cur_step_left(list);
+		value+=list->cur->data;
+        	ctwl_cur_step_right(list);
 	}
 	
 	return value;
