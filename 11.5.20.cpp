@@ -19,12 +19,17 @@ typedef struct{
 
 void ctwl_cur_step_right(CTWL *list) //ničoho sa nechytam iba posuniem cur
 {
-	
+	if(list->cur->next==NULL)
+		return NULL;
+		
 		list->cur=list->cur->next;
 }
 
 void ctwl_cur_step_left(CTWL *list)
 {
+	if (list->cur->prev==NULL)
+		return NULL;
+	
 	list->cur=list->cur->prev;
 }
 // https://www.geeksforgeeks.org/doubly-circular-linked-list-set-1-introduction-and-insertion/
