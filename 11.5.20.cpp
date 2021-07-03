@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define NULL 0
+//#define NULL 0
 #define CTWL_OK 1
 #define CTWL_FAIL 0
 
@@ -19,7 +19,8 @@ typedef struct{
 
 void ctwl_cur_step_right(CTWL *list) //ničoho sa nechytam iba posuniem cur
 {
-	list->cur=list->cur->next;
+	
+		list->cur=list->cur->next;
 }
 
 void ctwl_cur_step_left(CTWL *list)
@@ -32,7 +33,7 @@ TWN *ctwl_insert_left(CTWL* list, float val)
 {
 	TWN *cur, *novy, *cur_minus;
 	
-	novy = (TWN*)malloc(sizeof(TWN));
+	novy = (TWN *)malloc(sizeof(TWN));
 	
 	if(novy==NULL)
 		return NULL;
@@ -67,10 +68,12 @@ TWN *ctwl_insert_right(CTWL* list, float val)
 	
 	novy = (TWN*)malloc(sizeof(TWN));
 	
+	
 	if(novy==NULL)
 		return NULL;
 	
 	novy->data=val;
+	
 	
 	if(list->cur==NULL)
 	{
@@ -104,7 +107,7 @@ CTWL *ctwl_create_empty(void)
 	n=(CTWL*)malloc(sizeof(CTWL));
 	
 	if(n==NULL)
-		return NULL;
+		return 0;
 		
 	n->cur=NULL;
 	
@@ -140,6 +143,7 @@ char ctwl_delete(CTWL* list) //odstranenie kurzora
 	{ 
 		free(list->cur);
 		
+		
 		list->cur = NULL;
 		
 		return CTWL_OK;
@@ -165,7 +169,12 @@ char ctwl_delete(CTWL* list) //odstranenie kurzora
 void ctwl_print(CTWL *list)
 {
 	TWN *prvok;
-	prvok=list->cur;
+	
+	if(list->cur==NULL)  //ak v zozname nič nieje
+	
+		return ;	
+		
+	prvok=list->cur;	
 	
 	printf("%.f ",list->cur->data);
 	ctwl_cur_step_right(list);
@@ -176,15 +185,15 @@ void ctwl_print(CTWL *list)
         ctwl_cur_step_right(list);
      }
      
-	
 }
 
 
 float ctwl_sum_values(CTWL *list)
 {
 	TWN *prvok;
-	prvok= list->cur;
 	float value =0;
+	
+	prvok= list->cur;
 	
 	value = list->cur->data;
 	ctwl_cur_step_right(list);
@@ -225,7 +234,7 @@ void ctwl_destroy(CTWL* list)
 
 main()
 {
- unsigned int velkost = 5;
+ unsigned int velkost = 20;
  CTWL *zoznam;
  srand(time(0));
  
@@ -235,6 +244,5 @@ main()
  
  printf("\n\nvalue : %.f",ctwl_sum_values(zoznam));
 
- ctwl_delete(zoznam);
+// ctwl_delete(zoznam);
 }
-
