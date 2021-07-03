@@ -181,11 +181,11 @@ void ctwl_print(CTWL *list)
 }
 
 
-float ctwl_sun_values(CTWL *list)
+float ctwl_sum_values(CTWL *list)
 {
 	TWN *prvok;
 	prvok= list->cur;
-	unsigned int value =0;
+	float value =0;
 	
 	value = list->cur->data;
 	ctwl_cur_step_right(list);
@@ -232,9 +232,9 @@ main()
  
  zoznam = ctwl_create_random(velkost);
  ctwl_print(zoznam);
- ctwl_sun_values(zoznam);
+ ctwl_sum_values(zoznam);
  
- printf("\n\nvalue : %.f",ctwl_sun_values(zoznam));
+ printf("\n\nvalue : %.f",ctwl_sum_values(zoznam));
 
  ctwl_delete(zoznam);
 }
