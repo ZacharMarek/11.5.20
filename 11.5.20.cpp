@@ -138,8 +138,7 @@ char ctwl_delete(CTWL* list) //odstranenie kurzora
 		
 	if(list->cur->prev == list->cur && list->cur->next == list->cur)
 	{ 
-		free(list->cur->prev);
-		free(list->cur->next);
+		free(list->cur);
 		
 		list->cur = NULL;
 		
