@@ -171,7 +171,6 @@ void ctwl_print(CTWL *list)
 	TWN *prvok;
 	
 	if(list->cur==NULL)  //ak v zozname nič nieje
-	
 		return ;	
 		
 	prvok=list->cur;	
@@ -192,6 +191,10 @@ float ctwl_sum_values(CTWL *list)
 {
 	TWN *prvok;
 	float value =0;
+	
+	if(list->cur==NULL)
+		return 0;
+	
 	
 	prvok= list->cur;
 	
